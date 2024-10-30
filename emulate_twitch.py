@@ -1,10 +1,10 @@
-from rocket_league import *
+from games.rocket_league.RocketLeague import *
 import threading
 import random
 
 
 def emulator():
-    rl = Rocket_League() 
+    rl = RocketLeague() 
     
     # Create a thread for the controller method
     threading.Thread(target=rl.controller).start()

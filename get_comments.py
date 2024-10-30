@@ -1,6 +1,5 @@
 import socket
-import requests
-from rocket_league import *
+from GameController import GameController
 import threading
 
 # Twitch IRC settings
@@ -30,8 +29,8 @@ def connect_to_twitch():
 
 # Main loop to print chat messages
 def receive_messages(irc):
-    rl = Rocket_League()
-    threading.Thread(target=rl.controller).start()
+    controller = GameController()
+    threading.Thread(target=controller.controller).start()
 
     while True:
         response = irc.recv(2048).decode("utf-8")
@@ -40,7 +39,7 @@ def receive_messages(irc):
         elif "PRIVMSG" in response:
             # username = response.split("!", 1)[0][1:]
             message = response.split("PRIVMSG", 1)[1].split(":", 1)[1].strip().lower()
-            rl.new_input(message)
+            controller.new_input(message)
 if __name__ == "__main__":
     irc_connection = connect_to_twitch()
     print(irc_connection)
