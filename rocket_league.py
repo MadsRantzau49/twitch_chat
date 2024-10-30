@@ -29,7 +29,7 @@ class Rocket_League:
 
         if message in valid_inputs:
             self.press_key(message, 0.5)
-        elif message == "arial":
+        elif message == "aerial":
             self.arial()
         elif message == "frontflip":
             self.frontflip()
