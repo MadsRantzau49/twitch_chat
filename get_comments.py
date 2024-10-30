@@ -28,13 +28,11 @@ def connect_to_twitch():
             break
     return irc
 
-def handle_message(message):
-    # Create a thread for each input key
-    input_thread = threading.Thread(target=rocket_league_input, args=(message,))
-    input_thread.start()
-
 # Main loop to print chat messages
 def receive_messages(irc):
+    rl = Rocket_League()
+    threading.Thread(target=rl.controller).start()
+
     while True:
         response = irc.recv(2048).decode("utf-8")
         if response.startswith("PING"):
@@ -42,9 +40,7 @@ def receive_messages(irc):
         elif "PRIVMSG" in response:
             # username = response.split("!", 1)[0][1:]
             message = response.split("PRIVMSG", 1)[1].split(":", 1)[1].strip()
-            rocket_league_input(message)
-            # handle_message(message)
-
+            rl.new_input(message)
 if __name__ == "__main__":
     irc_connection = connect_to_twitch()
     print(irc_connection)
