@@ -28,7 +28,7 @@ class Rocket_League:
         valid_inputs = {"w", "a", "d", "s", "b", "j"}
 
         if message in valid_inputs:
-            self.press_key(message, 0.3)
+            self.press_key(message, 0.5)
         elif message == "arial":
             self.arial()
         elif message == "frontflip":
@@ -39,7 +39,7 @@ class Rocket_League:
     def press_valid_chars(self, message, valid_inputs):
         for char in message:
             if char in valid_inputs:
-                self.press_key(char, 0.1)
+                self.press_key(char, 0.3)
             else:
                 return
 
@@ -47,6 +47,9 @@ class Rocket_League:
         self.keyboard.press(key)
         time.sleep(time_press)
         self.keyboard.release(key)
+    
+    def press_multiple_keys(self,sequnce):
+        pass
 
     def is_string_too_long(self, message, max_length):
         return len(message) > max_length
@@ -56,14 +59,23 @@ class Rocket_League:
 
     def arial(self):
         arial_input = [
-            ["j", 0.4],
-            ["j", 0.4],
-            ["s", 0.4],
-            ["b", 4] 
+            ["j", 0.2],
+            ["j", 0.2],
+            ["s", 0.2],
+            ["b", 2.5] 
         ]
-        for input in arial_input:
-            self.press_key(input[0],input[1])
+        self.press_sequence(arial_input)
 
-    def frontflip():
-        pass
+    def frontflip(self):
+        front_flip_input = [
+            ["w",0.5],
+            ["j",0.2],
+            ["w",0.01],
+            ["j",0.2]
+        ]
+        self.press_sequence(front_flip_input)
+
+    def press_sequence(self, sequence):
+        for input in sequence:
+            self.press_key(input[0],input[1])
 

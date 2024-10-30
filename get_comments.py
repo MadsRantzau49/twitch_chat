@@ -39,7 +39,7 @@ def receive_messages(irc):
             irc.send("PONG :tmi.twitch.tv\n".encode("utf-8"))
         elif "PRIVMSG" in response:
             # username = response.split("!", 1)[0][1:]
-            message = response.split("PRIVMSG", 1)[1].split(":", 1)[1].strip()
+            message = response.split("PRIVMSG", 1)[1].split(":", 1)[1].strip().lower()
             rl.new_input(message)
 if __name__ == "__main__":
     irc_connection = connect_to_twitch()
